@@ -1,14 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 
-image_original = np.array(Image.open('C:\\Users\\addis\\OneDrive\\Pictures\\einstein.jpg').convert('L'))/255
+image_original = np.array(Image.open('einstein.jpg').convert('L'))/255
 upscale_factor = 1200//np.max(image_original.shape)
 image_original = np.kron(image_original, np.ones((upscale_factor, upscale_factor)))
 height, width = image_original.shape
@@ -44,7 +38,7 @@ image_copy[mask == 0] = 1
 # cirX = np.cos(theta)*r
 # cirY = np.sin(theta)*r
 
-n_nails = 300
+n_nails = 100
 dtheta = 360/n_nails
 nail_theta = np.radians(np.arange(0,360,dtheta))
 nails = np.arange(n_nails)
@@ -58,7 +52,7 @@ plt.scatter(nailX, nailY,s=0.5)
 plt.show()
 
 lines = np.copy(blank)
-n_lines = 3500
+n_lines = 350
 current_nail = 0
 previous_nail = 0
 line_color = 0.2
@@ -135,9 +129,6 @@ for i in range(n_lines):
 
 
 
-# In[169]:
-
-
 comp = np.copy(image)
 # image[lines < 1] = lines[lines < 1]
 
@@ -156,9 +147,6 @@ plt.plot(err_his)
 plt.show()
 
 print(nail_order)
-
-
-# In[9]:
 
 
 np.save('nail_order.npy',nail_order)
